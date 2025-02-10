@@ -6,7 +6,7 @@
 /*   By: aleortiz <aleortiz@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:25:24 by aleortiz          #+#    #+#             */
-/*   Updated: 2025/02/06 20:24:17 by aleortiz         ###   ########.fr       */
+/*   Updated: 2025/02/10 18:05:27 by aleortiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <fcntl.h>
+# include <errno.h>
 
-void	pip_menu(char **argv);
+void	pip_menu(char **argv,char **envp);
 
 #endif
 
