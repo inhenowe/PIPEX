@@ -6,7 +6,7 @@
 /*   By: aleortiz <aleortiz@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:16:20 by aleortiz          #+#    #+#             */
-/*   Updated: 2025/01/08 17:25:34 by aleortiz         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:18:35 by aleortiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ size_t			ft_strlcpy(char *dest, const char *src, size_t destsize);
 void			*ft_memchr(const void *s, int c, size_t n);
 char			*ft_strnstr(const char *big, const char *little, size_t len);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
-char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strjoin(char *s1, char *s2);
 char			*ft_strtrim(char const *s1, char const *set);
 char			**ft_split(char const *s, char c);
 char			*ft_itoa(int n);

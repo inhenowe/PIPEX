@@ -6,12 +6,15 @@
 /*   By: aleortiz <aleortiz@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:25:24 by aleortiz          #+#    #+#             */
-/*   Updated: 2025/02/10 18:05:27 by aleortiz         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:57:38 by aleortiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
+
+# define READ_SIDE 0
+# define WRITE_SIDE 1
 
 # include "../utils/src/ft_printf.h"
 # include "../utils/libftb/libft.h"
@@ -24,6 +27,8 @@
 # include <errno.h>
 
 void	pip_menu(char **argv,char **envp);
+void	offspring_write(char **data, char **envp, char *path, int fd1[2]);
+void	offspring_read(char **data, char **envp, char *path, int fd1[2]);
 
 #endif
 

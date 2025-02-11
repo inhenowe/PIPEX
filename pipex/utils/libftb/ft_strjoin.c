@@ -6,30 +6,36 @@
 /*   By: aleortiz <aleortiz@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 16:17:27 by aleortiz          #+#    #+#             */
-/*   Updated: 2024/12/15 12:27:40 by aleortiz         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:18:58 by aleortiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	int				ct1;
-	int				ct2;
-	char			*newstr;
-	unsigned int	n1;
+	size_t		ctu_s1s2;
+	size_t		ctu_s3;
+	char		*new_str;
 
-	n1 = (unsigned int)ft_strlen(s1) + (unsigned int)ft_strlen(s2);
-	newstr = (char *)malloc((n1 + 1));
-	ct1 = 0;
-	ct2 = 0;
-	if (!newstr)
-		return ((void *) 0);
-	while (s1[ct1] != 0)
-		newstr[ct2++] = s1[ct1++];
-	ct1 = 0;
-	while (s2[ct1] != 0)
-		newstr[ct2++] = s2[ct1++];
-	newstr[ct2] = 0;
-	return (newstr);
+	if (!s1)
+	{
+		s1 = (char *)malloc(sizeof(char) * 1);
+		s1[0] = '\0';
+	}
+	if (!s2)
+		return (NULL);
+	new_str = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (new_str == NULL)
+		return (NULL);
+	ctu_s1s2 = 0;
+	ctu_s3 = 0;
+	while (s1[ctu_s1s2])
+		new_str[ctu_s3++] = s1[ctu_s1s2++];
+	ctu_s1s2 = 0;
+	while (s2[ctu_s1s2])
+		new_str[ctu_s3++] = s2[ctu_s1s2++];
+	new_str[ctu_s3] = '\0';
+	free(s1);
+	return (new_str);
 }

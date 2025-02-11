@@ -6,7 +6,7 @@
 #    By: aleortiz <aleortiz@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/05 18:30:26 by aleortiz          #+#    #+#              #
-#    Updated: 2025/02/06 20:23:01 by aleortiz         ###   ########.fr        #
+#    Updated: 2025/02/11 18:58:50 by aleortiz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,5 +65,9 @@ fclean: clean
 	@$(RM) $(NAME)
 
 re: fclean all
+
+test1: Cpipex
+	echo "test"
+	./pipex Makefile "cat" "grep test1" test1.txt
 
 .PHONY: all clean fclean re
