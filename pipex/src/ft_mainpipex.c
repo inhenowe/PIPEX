@@ -6,10 +6,10 @@
 /*   By: aleortiz <aleortiz@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:44:53 by aleortiz          #+#    #+#             */
-/*   Updated: 2025/02/11 19:15:04 by aleortiz         ###   ########.fr       */
+/*   Updated: 2025/02/13 21:01:10 by aleortiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-                                                                               
+
 #include "pipex.h"
 
 void	pip_menu(char **argv,char **envp)
@@ -18,30 +18,34 @@ void	pip_menu(char **argv,char **envp)
 	int 	procesor_id;
 	char	*sourcepath;
 	char	**candf;
+	int		i;
 
-	sourcepath = (char *)malloc(6 + ft_strlen(argv[2]));
-	if (!sourcepath)
-		return;
-	ft_memmove(sourcepath, "/bin/", 6);
 	candf = ft_split(argv[2], ' ');
+	sourcepath = search_path(envp, candf[0]);
+	i = -1;
+	while (candf[++i])
+		free(candf[i]);
+	free(candf);
 	if (pipe(fd1) == -1)
-	{
 		perror("pipe");
-		exit(1);
-	}
 	procesor_id = fork();
 	if (procesor_id == 0)
-		offspring_read(argv, envp, ft_strjoin(sourcepath,candf[0]), fd1);
+		offspring_read(argv, envp, sourcepath, fd1);
 	else
 	{
-		close(fd1[WRITE_SIDE]); 
+		close(fd1[WRITE_SIDE]);
 		procesor_id = fork();
 		candf = ft_split(argv[3], ' ');
+		sourcepath = search_path(envp, candf[0]);
 		if (procesor_id == 0)
-			offspring_write(argv, envp, ft_strjoin(sourcepath,candf[0]), fd1);
+			offspring_write(argv, envp, sourcepath, fd1);
 		else
 			close(fd1[READ_SIDE]);
+		i = -1;
+		while (candf[++i])
+			free(candf[i]);
+		free(candf);
+		free(sourcepath);
 	}
-	free(sourcepath);
-	free(candf);
+
 }

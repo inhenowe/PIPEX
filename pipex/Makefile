@@ -6,14 +6,16 @@
 #    By: aleortiz <aleortiz@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/05 18:30:26 by aleortiz          #+#    #+#              #
-#    Updated: 2025/02/11 18:58:50 by aleortiz         ###   ########.fr        #
+#    Updated: 2025/02/13 20:27:02 by aleortiz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libpipex.a
 #----------------------FLAGS---------------------------#
 LIBCC = ar rcs
-CFLAGS = -Wall -Werror -Wextra -I$(HEADERPH) -I$(HEADERL)
+CFLAGS = -g -Wall -Werror -Wextra  -I$(HEADERPH) -I$(HEADERL)\
+#		 -g -fsanitize=address,undefined\
+
 #----------------------REMOVE--------------------------#
 RM = rm -f
 #----------------------PATHS---------------------------#
@@ -52,22 +54,22 @@ makeprintf:
 $(NAME): makeprintf $(OBJ)
 	@$(LIBCC) $(NAME) $(OBJ)
 
-Cpipex : $(NAME)
+Cpipex : $(NAME) clean
 	@cc $(CFLAGS) $(MAIN) $(NAME) -o pipex
+
+memory : Cpipex
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./pipex Makefile cat "grep Cpipex" out.txt
 
 clean:
 	@$(RM) -R $(OBJ)
 	@make clean -C $(HEADERP)
 
 fclean: clean
+	@$(RM) pipex
 	@$(RM) $(HEADERL)/libft.a
 	@$(RM) $(HEADERP)/libftprintf.a
 	@$(RM) $(NAME)
 
 re: fclean all
-
-test1: Cpipex
-	echo "test"
-	./pipex Makefile "cat" "grep test1" test1.txt
 
 .PHONY: all clean fclean re
